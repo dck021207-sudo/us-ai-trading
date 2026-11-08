@@ -3,7 +3,14 @@ from datetime import datetime, timezone
 from flask import Flask, request, jsonify, render_template, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
-app=Flask(__name__)
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app = Flask(
+    __name__,
+    template_folder=os.path.join(BASE_DIR, "templates")
+)
 app.secret_key=os.environ.get('SESSION_SECRET','development-only-change-me')
 DB=os.environ.get('DB_PATH','data/trading.sqlite3')
 SYMBOLS={'AAPL':190.0,'NVDA':130.0,'TSLA':250.0,'AMD':150.0,'PLTR':70.0}
