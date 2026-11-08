@@ -3,7 +3,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
-COPY templates ./templates
+COPY templates/ /app/templates/
 RUN mkdir -p /app/data
 ENV DB_PATH=/app/data/trading.sqlite3 PORT=8080
 EXPOSE 8080
