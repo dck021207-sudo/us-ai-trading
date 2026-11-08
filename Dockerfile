@@ -1,10 +1,19 @@
+
 FROM python:3.12-slim
+
 WORKDIR /app
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY app.py .
+
 COPY . /app/
+
 RUN mkdir -p /app/data
-ENV DB_PATH=/app/data/trading.sqlite3 PORT=8080
+RUN test -f /app/templates/login.html
+
+ENV DB_PATH=/app/data/trading.sqlite3
+ENV PORT=8080
+
 EXPOSE 8080
-CMD ["python","app.py"]
+
+CMD ["python", "app.py"]
